@@ -1,35 +1,126 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccm77j5rkh21w"]
+[gd_scene load_steps=9 format=3 uid="uid://ccm77j5rkh21w"]
 
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_sue4n"]
-[ext_resource type="PackedScene" uid="uid://d21giy40pnjhe" path="res://scenes/weapon/pistol.tscn" id="2_blr4e"]
-[ext_resource type="Texture2D" uid="uid://d1nfjip21kjpu" path="res://addons/kenney_prototype_textures/orange/texture_13.png" id="2_i60ip"]
+[ext_resource type="PackedScene" uid="uid://ceywbkneyatpw" path="res://scenes/utils/body.tscn" id="2_2couv"]
+[ext_resource type="PackedScene" uid="uid://bmqutwuj28san" path="res://scenes/utils/view_model_camera.tscn" id="4_al83x"]
+[ext_resource type="PackedScene" uid="uid://cn7ty4xcbiqaf" path="res://assets/models/character/character.glb" id="8_42pl8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6bjf"]
-albedo_texture = ExtResource("2_i60ip")
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_adkee"]
+radius = 0.368364
+height = 1.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1sre5"]
+[sub_resource type="Animation" id="Animation_rf8fv"]
+resource_name = "Crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.8, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(0, 0.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../UpperTorso:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.2734, 0), Vector3(0, 0.639947, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mgw3s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../UpperTorso:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.2734, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mnir7"]
+_data = {
+"Crouch": SubResource("Animation_rf8fv"),
+"RESET": SubResource("Animation_mgw3s")
+}
 
 [node name="Character" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("ANIMATION_PLAYER")]
 script = ExtResource("1_sue4n")
-
-[node name="Body" type="CSGCylinder3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975222, 0)
-material_override = SubResource("StandardMaterial3D_m6bjf")
-
-[node name="UpperTorso" type="CSGSphere3D" parent="CharacterBody3D/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298181, 0)
-
-[node name="CameraMount" type="Node3D" parent="CharacterBody3D/Body/UpperTorso"]
-transform = Transform3D(1, 0, 0, 0, 0.999971, 0.00759248, 0, -0.00759248, 0.999971, 0, 0.212444, 0)
-
-[node name="Camera" type="Camera3D" parent="CharacterBody3D/Body/UpperTorso/CameraMount"]
-transform = Transform3D(1, 0, 0, 0, 1, -4.65661e-10, 0, 0, 1, 0, 0.0051769, -0.68182)
-
-[node name="Pistol" parent="CharacterBody3D/Body/UpperTorso" instance=ExtResource("2_blr4e")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.26718, -0.000199199, -0.945376)
+ANIMATION_PLAYER = NodePath("AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981342, 0)
-shape = SubResource("CylinderShape3D_1sre5")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.439226, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_adkee")
+
+[node name="character" parent="CharacterBody3D" instance=ExtResource("2_2couv")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="UpperTorso" type="CSGSphere3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2734, 0)
+radius = 0.001
+
+[node name="ViewModelCamera" parent="CharacterBody3D/UpperTorso" instance=ExtResource("4_al83x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00122696, 0.093623, -0.179357)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
+root_node = NodePath("../CollisionShape3D")
+libraries = {
+"": SubResource("AnimationLibrary_mnir7")
+}
+
+[node name="RealBody" type="Node3D" parent="CharacterBody3D"]
+
+[node name="character2" parent="CharacterBody3D/RealBody" instance=ExtResource("8_42pl8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.0147014)
