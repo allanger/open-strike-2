@@ -1,23 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://hivk5ek6u887"]
+[gd_scene load_steps=14 format=3 uid="uid://hivk5ek6u887"]
 
-[ext_resource type="Texture2D" uid="uid://c5uytbu1wc1bq" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="1_llm1c"]
-[ext_resource type="Texture2D" uid="uid://e4nd8b6f0tw7" path="res://addons/kenney_prototype_textures/dark/texture_04.png" id="2_k2arh"]
+[ext_resource type="Texture2D" uid="uid://du0f7hc4skged" path="res://addons/kenney_prototype_textures/dark/texture_06.png" id="1_lae2b"]
+[ext_resource type="Texture2D" uid="uid://dmge3tk7w0b1n" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_7newm"]
+[ext_resource type="PackedScene" uid="uid://cn7ty4xcbiqaf" path="res://assets/models/character/character.glb" id="3_exa4b"]
 [ext_resource type="PackedScene" uid="uid://ccm77j5rkh21w" path="res://scenes/utils/character.tscn" id="3_omcjn"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llvtk"]
-albedo_texture = ExtResource("1_llm1c")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcdcw"]
+albedo_texture = ExtResource("1_lae2b")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50gm5"]
-albedo_texture = ExtResource("2_k2arh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4psn"]
+albedo_texture = ExtResource("2_7newm")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c334k"]
-albedo_texture = ExtResource("2_k2arh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jiki"]
+albedo_texture = ExtResource("2_7newm")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlanx"]
-albedo_texture = ExtResource("2_k2arh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1pwnn"]
+albedo_texture = ExtResource("2_7newm")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjh6x"]
-albedo_texture = ExtResource("2_k2arh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yo6k"]
+albedo_texture = ExtResource("2_7newm")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3aaun"]
+
+[sub_resource type="Sky" id="Sky_xco2g"]
+sky_material = SubResource("ProceduralSkyMaterial_3aaun")
+
+[sub_resource type="Environment" id="Environment_5t2t5"]
+background_mode = 2
+sky = SubResource("Sky_xco2g")
+sdfgi_enabled = true
+fog_light_energy = 0.52
+fog_density = 0.1387
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_32hnm"]
 
 [node name="TestMap" type="Node3D"]
 
@@ -28,33 +45,72 @@ shadow_enabled = true
 [node name="Base" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Base"]
-material_override = SubResource("StandardMaterial3D_llvtk")
+material_override = SubResource("StandardMaterial3D_bcdcw")
 use_collision = true
 size = Vector3(100, 1, 100)
 
 [node name="Wall_1" type="CSGBox3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0)
-material_override = SubResource("StandardMaterial3D_50gm5")
+material_override = SubResource("StandardMaterial3D_p4psn")
 use_collision = true
 size = Vector3(1, 20, 100)
 
 [node name="Wall_2" type="CSGBox3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 0)
-material_override = SubResource("StandardMaterial3D_c334k")
+material_override = SubResource("StandardMaterial3D_0jiki")
 use_collision = true
 size = Vector3(1, 20, 100)
 
 [node name="Wall_3" type="CSGBox3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
-material_override = SubResource("StandardMaterial3D_nlanx")
+material_override = SubResource("StandardMaterial3D_1pwnn")
 use_collision = true
 size = Vector3(100, 20, 1)
 
 [node name="Wall_4" type="CSGBox3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
-material_override = SubResource("StandardMaterial3D_cjh6x")
+material_override = SubResource("StandardMaterial3D_1yo6k")
 use_collision = true
 size = Vector3(100, 20, 1)
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5t2t5")
+camera_attributes = SubResource("CameraAttributesPractical_32hnm")
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Roof" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 10, 40)
+use_collision = true
+size = Vector3(20, 1, 20)
+
+[node name="Box2" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.4113, -0.977205, 30.1989)
+use_collision = true
+size = Vector3(15, 4, 5)
+
+[node name="Box2" type="CSGBox3D" parent="Room/Box2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.808781, 0.545475, -9.7784)
+use_collision = true
+size = Vector3(15, 4, 5)
+
+[node name="Box" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.354, 2, 30)
+use_collision = true
+size = Vector3(15, 4, 5)
+
+[node name="Box3" type="CSGBox3D" parent="Room"]
+transform = Transform3D(0.919513, -0.393059, 0, 0.393059, 0.919513, 0, 0, 0, 1, -1.57507, -0.966964, 27.4611)
+use_collision = true
+size = Vector3(15, 4, 5)
+
+[node name="Box4" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9181, -1.39989, 28.83)
+use_collision = true
+size = Vector3(15, 4, 5)
+
+[node name="character" parent="Room" instance=ExtResource("3_exa4b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2581, 0.499998, 16.9319)
+
 [node name="Character" parent="." instance=ExtResource("3_omcjn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9816, 0, 28.0621)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

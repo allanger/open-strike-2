@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1v6kb00y77ij"]
+
+[ext_resource type="Script" path="res://scenes/maps/el_test.gd" id="1_d5e7i"]
+[ext_resource type="PackedScene" uid="uid://clp0pm3nxovxc" path="res://assets/models/maps/el_test.glb" id="2_cnkr5"]
+
+[node name="ElTest" type="Node3D"]
+script = ExtResource("1_d5e7i")
+
+[node name="Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.508004, 0.861354, 0, -0.861354, 0.508004, 0, 2.97783, 2.62213)
+
+[node name="Map" parent="." instance=ExtResource("2_cnkr5")]
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Red" type="Node3D" parent="Spawns"]
+
+[node name="SpawnArea" type="CSGBox3D" parent="Spawns/Red"]
+transform = Transform3D(12.6683, 0, 0, 0, 1.0986, 0, 0, 0, 7.83287, -24.5455, 1.59351, 1.14462)
+size = Vector3(0.100647, 1, 6.02112)
+
+[node name="Blue" type="Node3D" parent="Spawns"]
+
+[node name="SpawnArea" type="CSGBox3D" parent="Spawns/Blue"]
+transform = Transform3D(5.70162, 0, 0, 0, 1, 0, 0, 0, 7.97817, 21.2099, 1.78438, 1.23551)
+size = Vector3(0.484497, 1, 5.99213)

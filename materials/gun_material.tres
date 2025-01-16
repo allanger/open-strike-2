@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bu08phmafivot"]
+
+[ext_resource type="Texture2D" uid="uid://bmp60duks1bvx" path="res://assets/models/weapon/DEAGLE/DEAGLE_deagle_default_color_psd_51a7b347.png" id="1_iyxpn"]
+[ext_resource type="Texture2D" uid="uid://db6ilhirenk8a" path="res://assets/models/weapon/DEAGLE/DEAGLE_deagle_default_normal_tga_f25ac800.png" id="2_gx6oo"]
+
+[resource]
+albedo_texture = ExtResource("1_iyxpn")
+metallic = 1.0
+metallic_texture = ExtResource("2_gx6oo")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_gx6oo")
+roughness_texture_channel = 1
+normal_enabled = true
+ao_enabled = true
+ao_texture = ExtResource("2_gx6oo")
