@@ -22,7 +22,8 @@ var walk_vel: Vector3 # Walking velocity
 var grav_vel: Vector3 # Gravity velocity 
 var jump_vel: Vector3 # Jumping velocity
 
-@onready var camera: Node3D = $Body/CameraMount
+@onready var camera: Node3D = $Body/UpperTorso
+@onready var character: Node3D = $"."
 
 func _ready() -> void:
 	capture_mouse()
@@ -33,10 +34,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		if mouse_captured: _rotate_camera()
 	if Input.is_action_just_pressed("jump"): jumping = true
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
+	if Input.is_action_just_pressed("shot"): $Body/UpperTorso/Pistol.shot()
+	if Input.is_action_just_pressed("reload"): $Body/UpperTorso/Pistol.reload()
+	
 
 func _physics_process(delta: float) -> void:
 	if mouse_captured: _handle_joypad_camera_rotation(delta)
 	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
+	
 	move_and_slide()
 
 func capture_mouse() -> void:
@@ -48,7 +53,7 @@ func release_mouse() -> void:
 	mouse_captured = false
 
 func _rotate_camera(sens_mod: float = 1.0) -> void:
-	camera.rotation.y -= look_dir.x * camera_sens * sens_mod
+	character.rotation.y -= look_dir.x * camera_sens * sens_mod
 	camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
 
 func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void:

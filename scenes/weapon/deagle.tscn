@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b50vg1umdgjas"]
+
+[ext_resource type="PackedScene" uid="uid://dumj5qqh2h2tg" path="res://assets/models/weapon/DEAGLE/DEAGLE.glb" id="1_5xic7"]
+
+[node name="DEAGLE" instance=ExtResource("1_5xic7")]
