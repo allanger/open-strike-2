@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccm77j5rkh21w"]
+[gd_scene load_steps=7 format=3 uid="uid://ccm77j5rkh21w"]
 
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_sue4n"]
 [ext_resource type="PackedScene" uid="uid://d21giy40pnjhe" path="res://scenes/weapon/pistol.tscn" id="2_blr4e"]
 [ext_resource type="Texture2D" uid="uid://d1nfjip21kjpu" path="res://addons/kenney_prototype_textures/orange/texture_13.png" id="2_i60ip"]
+[ext_resource type="Script" path="res://scenes/weapon/pistol.gd" id="3_td5sn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6bjf"]
 albedo_texture = ExtResource("2_i60ip")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1sre5"]
+radius = 0.227448
 
 [node name="Character" type="Node3D"]
 
@@ -15,21 +17,25 @@ albedo_texture = ExtResource("2_i60ip")
 script = ExtResource("1_sue4n")
 
 [node name="Body" type="CSGCylinder3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975222, 0)
+transform = Transform3D(0.999983, 0.00579446, 0, -0.00579446, 0.999983, 0, 0, 0, 1, 0, 0.975222, 0)
 material_override = SubResource("StandardMaterial3D_m6bjf")
+radius = 0.492
 
 [node name="UpperTorso" type="CSGSphere3D" parent="CharacterBody3D/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298181, 0)
+radius = 0.001
 
 [node name="CameraMount" type="Node3D" parent="CharacterBody3D/Body/UpperTorso"]
-transform = Transform3D(1, 0, 0, 0, 0.999971, 0.00759248, 0, -0.00759248, 0.999971, 0, 0.212444, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0214237, -0.151336, -0.0131589)
 
 [node name="Camera" type="Camera3D" parent="CharacterBody3D/Body/UpperTorso/CameraMount"]
-transform = Transform3D(1, 0, 0, 0, 1, -4.65661e-10, 0, 0, 1, 0, 0.0051769, -0.68182)
+transform = Transform3D(0.999902, 0.0139622, 0, -0.0139622, 0.999902, 0, 0, 0, 0.999999, 0, 0, 0)
+script = ExtResource("3_td5sn")
 
-[node name="Pistol" parent="CharacterBody3D/Body/UpperTorso" instance=ExtResource("2_blr4e")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.26718, -0.000199199, -0.945376)
+[node name="Pistol" parent="CharacterBody3D/Body/UpperTorso/CameraMount/Camera" instance=ExtResource("2_blr4e")]
+transform = Transform3D(-0.999901, -0.0139622, -8.74142e-08, -0.0139621, 0.999901, -1.22061e-09, 8.74228e-08, 0, -1, 0.346313, -0.1921, -0.617977)
+script = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981342, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.981342, 0)
 shape = SubResource("CylinderShape3D_1sre5")

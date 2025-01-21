@@ -34,8 +34,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if mouse_captured: _rotate_camera()
 	if Input.is_action_just_pressed("jump"): jumping = true
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
-	if Input.is_action_just_pressed("shot"): $Body/UpperTorso/Pistol.shot()
-	if Input.is_action_just_pressed("reload"): $Body/UpperTorso/Pistol.reload()
+	if Input.is_action_just_pressed("shot"): $Body/UpperTorso/CameraMount/Camera.shot()
+	if Input.is_action_just_pressed("reload"): $Body/UpperTorso/CameraMount/Camera.reload()
 	
 
 func _physics_process(delta: float) -> void:
