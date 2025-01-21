@@ -1,6 +1,6 @@
 extends Node3D
 
-const SPEED = 10
+const SPEED = 100
 
 @onready var mesh = $MeshInstance3D
 @onready var ray = $RayCast3D
@@ -13,7 +13,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += transform.basis * Vector3(0, 0, -SPEED) * delta
+	position += transform.basis * Vector3(0, 0, 	SPEED) * delta
 	if ray.is_colliding():
 		mesh.visible = false
 		particles.emitting = true

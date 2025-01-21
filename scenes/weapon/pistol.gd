@@ -13,13 +13,15 @@ func _ready() -> void:
 
 # TODO: Handle the shot logic
 func shot():
+	var main_root = get_node("/root/TestMap")
 	if Input.is_action_pressed("shot"):
 		if !gun_anim.is_playing():
 			gun_anim.play("Shoot")
 			instance = bullet.instantiate()
-			instance.position = gun_barrel.position + Vector3(1.5, -0.5, -3)
-			instance.transform.basis = gun_barrel.transform.basis
-			get_parent().add_child(instance)
+			instance.position = gun_barrel.global_position
+			instance.transform.basis = gun_barrel.global_transform.basis
+			get_tree().get_root().add_child(instance)
+			main_root.add_child(instance)
 
 # TODO: Handle the reload logic
 func reload():
