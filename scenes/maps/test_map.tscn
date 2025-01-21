@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c5uytbu1wc1bq" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="1_llm1c"]
 [ext_resource type="Texture2D" uid="uid://e4nd8b6f0tw7" path="res://addons/kenney_prototype_textures/dark/texture_04.png" id="2_k2arh"]
-[ext_resource type="PackedScene" uid="uid://ccm77j5rkh21w" path="res://scenes/utils/character.tscn" id="3_omcjn"]
+[ext_resource type="PackedScene" uid="uid://1j5ajc26w5xk" path="res://scenes/utils/character_bak.tscn" id="3_6anfg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llvtk"]
 albedo_texture = ExtResource("1_llm1c")
@@ -55,5 +55,5 @@ material_override = SubResource("StandardMaterial3D_cjh6x")
 use_collision = true
 size = Vector3(100, 20, 1)
 
-[node name="Character" parent="." instance=ExtResource("3_omcjn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9816, 0, 28.0621)
+[node name="Character" parent="." instance=ExtResource("3_6anfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6432, 0)
